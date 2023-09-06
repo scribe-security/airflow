@@ -26,8 +26,8 @@ jobs:
           scribe-url: $SCRIBE_API_BASE_URI
           scribe-login-url: https://$AUTH0_DOMAIN
           scribe-auth-audience: $AUTH0_SCRIBE_SERVICE_AUDIENCE
-          scribe-client-id: ${{ secrets.clientid }}
-          scribe-client-secret: ${{ secrets.clientsecret }}
+          scribe-client-id: ${{ secrets.SCRIBE_RESEARCH_S_CLIENT_ID }}
+          scribe-client-secret: ${{ secrets.SCRIBE_RESEARCH_S_CLIENT_SECRET }}
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -54,14 +54,5 @@ jobs:
           scribe-url: $SCRIBE_API_BASE_URI
           scribe-login-url: https://$AUTH0_DOMAIN
           scribe-auth-audience: $AUTH0_SCRIBE_SERVICE_AUDIENCE
-          scribe-client-id: ${{ secrets.clientid }}
-          scribe-client-secret: ${{ secrets.clientsecret }}
-
-      - name: Log in to Docker Hub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Tag Docker image
-        run: docker tag airflow-image:${{ github.sha }} shivamkush/airflow:latest
-
-      - name: Push Docker image to Docker Hub
-        run: docker push shivamkush/airflow:latest
+          scribe-client-id: ${{ secrets.SCRIBE_RESEARCH_S_CLIENT_ID }}
+          scribe-client-secret: ${{ secrets.SCRIBE_RESEARCH_S_CLIENT_SECRET }}
