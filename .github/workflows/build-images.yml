@@ -20,8 +20,8 @@ jobs:
           type: git
           target: .
           format: json
-          product-key: airflow-git-SBOM
-          product-version: ${{ github.run_id }}
+          product-key: airflow-Github
+          product-version: ${{ env.APP_VERSION }}
           scribe-enable: true
           scribe-url: $SCRIBE_API_BASE_URI
           scribe-login-url: https://$AUTH0_DOMAIN
@@ -48,8 +48,8 @@ jobs:
           target: 'airflow-image:${{ github.sha }}'
           format: json
           force: true
-          product-key: airflow-image-SBOM
-          product-version: ${{ github.run_id }}
+          product-key: airflow-Github
+          product-version: ${{ env.APP_VERSION }}
           scribe-enable: true
           scribe-url: $SCRIBE_API_BASE_URI
           scribe-login-url: https://$AUTH0_DOMAIN
