@@ -21,7 +21,7 @@ jobs:
           target: .
           format: json
           product-key: airflow-Github
-          product-version: ${{ env.APP_VERSION }}
+          product-version: 2.7.0
           scribe-enable: true
           scribe-url: $SCRIBE_API_BASE_URI
           scribe-login-url: https://$AUTH0_DOMAIN
@@ -36,7 +36,7 @@ jobs:
 
       - name: Build images
         run: |
-          docker build -t airflow-image:${{ github.sha }} .
+          docker build -t airflow-image:2.7.0 .
 
       - name: Display Docker image
         run: docker images
@@ -45,11 +45,11 @@ jobs:
         uses: scribe-security/action-bom@master
         with:
           type: docker
-          target: 'airflow-image:${{ github.sha }}'
+          target: 'airflow-image:2.7.0'
           format: json
           force: true
           product-key: airflow-Github
-          product-version: ${{ env.APP_VERSION }}
+          product-version: 2.7.0
           scribe-enable: true
           scribe-url: $SCRIBE_API_BASE_URI
           scribe-login-url: https://$AUTH0_DOMAIN
