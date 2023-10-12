@@ -34,7 +34,7 @@ spec:
     }
 
     environment {
-        IMAGE = "scribedocker/airflow:latest"
+        IMAGE = "scribedocker/airflow:2.7.0"
     }
 
     stages {
@@ -52,7 +52,8 @@ spec:
                 --context-type jenkins \
                 --output-directory ./scribe/valint \
                 -E -U $SCRIBE_CLIENT_ID -P $SCRIBE_CLIENT_SECRET \
-                --product-key="dir-airflow-jenkins-k8s" \
+                --product-key="airflow-jenkins" \
+                --product-version="2.7.0" \
                 --scribe.auth.audience=api.research.scribesecurity.com \
                 --scribe.login-url=https://scribe-hub-dev.us.auth0.com \
                 --scribe.url=https://airflow.research.scribesecurity.com '''
@@ -72,7 +73,7 @@ spec:
                         }
                         sh '''
                         docker images
-                        docker push scribedocker/airflow:latest
+                        docker push scribedocker/airflow:2.7.0
                         '''
                       }
                     }
@@ -85,11 +86,12 @@ spec:
                 container('valint') {
                     withCredentials([usernamePassword(credentialsId: 'scribe-research-auth-id', usernameVariable: 'SCRIBE_CLIENT_ID', passwordVariable: 'SCRIBE_CLIENT_SECRET')]) {
                         sh '''
-                        valint bom scribedocker/airflow:latest \
+                        valint bom scribedocker/airflow:2.7.0 \
                         --context-type jenkins \
                         --output-directory ./scribe/valint \
                         -E -U $SCRIBE_CLIENT_ID -P $SCRIBE_CLIENT_SECRET \
-                        --product-key="image-airflow-jenkins-k8s" \
+                        --product-key="airflow-jenkins" \
+                        --product-version="2.7.0" \
                         --scribe.auth.audience=api.research.scribesecurity.com \
                         --scribe.login-url=https://scribe-hub-dev.us.auth0.com \
                         --scribe.url=https://airflow.research.scribesecurity.com '''
